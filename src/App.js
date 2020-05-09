@@ -1,25 +1,32 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './tailwind.generated.css';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import Login from './components/auth/Login';
+import NuevoCliente from './components/clientes/NuevoCliente';
+import ListadoClientes from './components/clientes/ListadoClientes';
+import Layout from './components/layout/Layout';
+import EditarCliente from './components/clientes/EditarCliente';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Layout>
+
+        <Switch>
+          <Route exact path="/" component={Login} />
+          <Route exact path="/clientes" component={ListadoClientes} />
+          <Route exact path="/nuevo-cliente" component={NuevoCliente} />
+          <Route exact path="/editarcliente/" component={EditarCliente} />
+
+          {/* <RutaPrivada exact path="/clientes" component={Clientes} /> */}
+
+
+          <Redirect to="/" /> 
+
+        </Switch>
+
+      </Layout>
+    </Router>
   );
 }
 
