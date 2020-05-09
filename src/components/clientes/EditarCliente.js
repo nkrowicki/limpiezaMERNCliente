@@ -1,8 +1,27 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 const EditarCliente = () => {
 
     // Obtener id cliente de props
+
+    // State Inicial
+    const [datosContacto, setdatosContacto] = useState({
+        nombre: '', 
+        email: '', 
+        telefono: '', 
+        area: ''
+    });
+
+    const {nombre, email, telefono, area} = datosContacto;
+
+    const onChange = (e) => {
+
+        setdatosContacto({
+            ...datosContacto,
+            [e.target.name]: e.target.value
+        }
+        )
+    }
 
 
     return (
@@ -63,22 +82,43 @@ const EditarCliente = () => {
                                 <div className="flex flex-col md:flex-row">
                                     <div className="w-full  mx-2">
                                         <div className="my-2 p-1 bg-white flex border border-gray-200 rounded">
-                                            <input placeholder="Nombre del contacto" className="p-1 px-2 appearance-none outline-none w-full text-gray-800 " /> </div>
+                                            <input 
+                                            placeholder="Nombre del contacto" 
+                                            name="nombre"
+                                            value={nombre}
+                                            onChange={onChange}
+                                            className="p-1 px-2 appearance-none outline-none w-full text-gray-800 " /> </div>
                                     </div>
                                     <div className="w-full  mx-2">
                                         <div className="my-2 p-1 bg-white flex border border-gray-200 rounded">
-                                            <input placeholder="Email" className="p-1 px-2 appearance-none outline-none w-full text-gray-800 " /> </div>
+                                            <input 
+                                            placeholder="Email" 
+                                            name="email" 
+                                            value={email}
+                                            onChange={onChange}
+                                            className="p-1 px-2 appearance-none outline-none w-full text-gray-800 " /> </div>
                                     </div>
                                     <div className="w-full  mx-2">
                                         <div className="my-2 p-1 bg-white flex border border-gray-200 rounded">
-                                            <input placeholder="Teléfono" className="p-1 px-2 appearance-none outline-none w-full text-gray-800 " /> </div>
+                                            <input 
+                                            placeholder="Teléfono" 
+                                            name="telefono" 
+                                            value={telefono}
+                                            onChange={onChange}
+                                            className="p-1 px-2 appearance-none outline-none w-full text-gray-800 " /> </div>
                                     </div>
                                     <div className="w-full  mx-2">
                                         <div className="my-2 p-1 bg-white flex border border-gray-200 rounded">
-                                            <input placeholder="Área o Sector" className="p-1 px-2 appearance-none outline-none w-full text-gray-800 " /> </div>
+                                            <input 
+                                            placeholder="Área o Sector" 
+                                            name="area"
+                                            value={area}
+                                            onChange={onChange}
+                                            className="p-1 px-2 appearance-none outline-none w-full text-gray-800 " /> </div>
                                     </div>
                                     <div className="w-full mx-2 flex items-center justify-center">
-                                        <button type="button" className="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline">Eliminar</button>
+                                        <button type="button" 
+                                        className="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline">Eliminar</button>
                                     </div>
                                 </div>
 

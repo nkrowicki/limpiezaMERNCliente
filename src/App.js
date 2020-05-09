@@ -16,7 +16,7 @@ function App() {
           <Route exact path="/" component={Login} />
           <Route exact path="/clientes" component={ListadoClientes} />
           <Route exact path="/nuevo-cliente" component={NuevoCliente} />
-          <Route exact path="/editarcliente/" component={EditarCliente} />
+          <Route exact path="/editar-cliente/" component={EditarCliente} />
 
           {/* <RutaPrivada exact path="/clientes" component={Clientes} /> */}
 
