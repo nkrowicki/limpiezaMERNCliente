@@ -1,152 +1,260 @@
-import React, {useState} from 'react';
+import React, { useState } from "react";
 
 const EditarCliente = () => {
+  // Obtener id cliente de props
 
-    // Obtener id cliente de props
+  const datosCliente = {
+    id: 1,
+    nombreEmpresa: "Nubedi",
+    cuit: 1010101010,
+    direccion: [
+      {
+        id: 1,
+        calle: "Rivadavia",
+        altura: 10,
+        codPostal: 100,
+        localidad: "Ramos Mejía",
+      },
+      {
+        id: 2,
+        calle: "Alsina",
+        altura: 20,
+        codPostal: 200,
+        localidad: "Caseros",
+      },
+    ],
+    datosContacto: [
+      {
+        id: 1,
+        nombre: "Nahuel",
+        email: "nkrowicki@nubedi.com",
+        tel: "4545-4545",
+        area: "Sistemas",
+      },
+      {
+        id: 2,
+        nombre: "Jorge",
+        email: "jorge@nubedi.com",
+        tel: "123-123",
+        area: "Finanzas",
+      },
+    ],
+  };
 
-    // State Inicial
-    const [datosContacto, setdatosContacto] = useState({
-        nombre: '', 
-        email: '', 
-        telefono: '', 
-        area: ''
+  // State Inicial
+  const [datosContacto, setdatosContacto] = useState({
+    nombre: "",
+    email: "",
+    telefono: "",
+    area: "",
+  });
+
+  const { nombre, email, telefono, area } = datosContacto;
+
+  const onChange = (e) => {
+    setdatosContacto({
+      ...datosContacto,
+      [e.target.name]: e.target.value,
     });
+  };
 
-    const {nombre, email, telefono, area} = datosContacto;
-
-    const onChange = (e) => {
-
-        setdatosContacto({
-            ...datosContacto,
-            [e.target.name]: e.target.value
-        }
-        )
-    }
-
-
-    return (
-        <>
-            <div className="text-gray-900">
-                <div className="p-4 flex justify-center w-full text-gray-900">
-                    <h1 className="text-3xl">
-                        Editar Cliente
-                    </h1>
+  return (
+    <>
+      <div className="text-gray-900">
+        <div className="p-4 flex justify-center w-full text-gray-900">
+          <h1 className="text-3xl">Editar Cliente</h1>
+        </div>
+        <div className="p-5">
+          <div className="mt-2">
+            <div className="flex flex-col md:flex-row justify-around border-b border-gray-200 pb-4 mb-4">
+              {/* <div className="w-64 font-bold h-6 mx-2 mt-3 text-gray-800">Nombre</div> */}
+              <div className="w-full flex items-center justify-center mx-5">
+                <p className="text-xl">
+                  Nombre:{" "}
+                  <span className="font-bold">
+                    {datosCliente.nombreEmpresa}
+                  </span>
+                </p>
+              </div>
+              <div className="w-full flex flex-row items-center justify-center mx-5">
+                <p className="text-xl">
+                  Cuit: <span className="font-bold">{datosCliente.cuit}</span>
+                </p>
+              </div>
+            </div>
+            <div className="flex flex-col md:flex-row pb-4 mb-4">
+              <div className="w-64 font-bold h-6 mx-2 m-3 text-gray-800">
+                Dirección
+                <div className="text-xs font-normal leading-none text-gray-500">
+                  Dirección del cliente
                 </div>
-                <div className="p-5">
-                    <div className="mt-2">
-                        <div className="flex flex-col md:flex-row border-b border-gray-200 pb-4 mb-4">
-                            <div className="w-64 font-bold h-6 mx-2 mt-3 text-gray-800">Nombre</div>
-                            <div className=" flex flex-col md:flex-row">
-                                <div className="w-full  mx-2">
-                                    <div className="my-2 p-1 bg-white flex border border-gray-200 rounded">
-                                        <input placeholder="Nombre del cliente" className="p-1 px-2 appearance-none outline-none w-full text-gray-800 " /> </div>
-                                </div>
-                                <div className="w-full  mx-2">
-                                    <div className="my-2 p-1 bg-white flex border border-gray-200 rounded">
-                                        <input placeholder="CUIT" className="p-1 px-2 appearance-none outline-none w-full text-gray-800 " /> </div>
-                                </div>
-                            </div>
+              </div>
+                <div className="flex bg-green-600 flex-col">
+                  <div className="flex justify-around">
+                    <p className="text-xl">
+                      Calle:{" "}
+                      <span className="font-bold">
+                        {datosCliente.direccion[0].calle}
+                      </span>
+                    </p>
+                    <p className="text-xl">
+                      Altura:{" "}
+                      <span className="font-bold">
+                      {datosCliente.direccion[0].altura}
+                      </span>
+                    </p>
+                    <p className="text-xl">
+                      Código postal:{" "}
+                      <span className="font-bold">
+                      {datosCliente.direccion[0].codPostal}
+                      </span>
+                    </p>
+                    <p className="text-xl">
+                      Barrio o Localidad:{" "}
+                      <span className="font-bold">
+                      {datosCliente.direccion[0].localidad}
+                      </span>
+                    </p>
+                  </div>
+                  <div className="">
+                    <div className="flex flex-col md:flex-row">
+                      <div className="w-full mx-2">
+                        <div className="my-2 p-1 bg-white flex border border-gray-200 rounded">
+                          <input
+                            placeholder="Calle"
+                            className="p-1 px-2 appearance-none outline-none w-full text-gray-800 "
+                          />{" "}
                         </div>
-                        <div className="flex flex-col md:flex-row pb-4 mb-4">
-                            <div className="w-64 font-bold h-6 mx-2 m-3 text-gray-800">Dirección
-            <div className="text-xs font-normal leading-none text-gray-500">Dirección del cliente</div>
-                            </div>
-                            <div className="">
-                                <div className="flex flex-col md:flex-row">
-                                    <div className="w-full  mx-2">
-                                        <div className="my-2 p-1 bg-white flex border border-gray-200 rounded">
-                                            <input placeholder="Calle" className="p-1 px-2 appearance-none outline-none w-full text-gray-800 " /> </div>
-                                    </div>
-                                    <div className="w-full  mx-2">
-                                        <div className="my-2 p-1 bg-white flex border border-gray-200 rounded">
-                                            <input placeholder="Altura" className="p-1 px-2 appearance-none outline-none w-full text-gray-800 " /> </div>
-                                    </div>
-                                    <div className="w-full  mx-2">
-                                        <div className="my-2 p-1 bg-white flex border border-gray-200 rounded">
-                                            <input placeholder="Código postal" className="p-1 px-2 appearance-none outline-none w-full text-gray-800 " /> </div>
-                                    </div>
-                                </div>
-                                <div className="m-2">
-                                    <div className="w-full ">
-                                        <div className="my-2 p-1 bg-white flex border border-gray-200 rounded">
-                                            <input placeholder="Barrio o Localidad" className="p-1 px-2 appearance-none outline-none w-full text-gray-800 " /> </div>
-                                    </div>
-                                </div>
-                            </div>
+                      </div>
+                      <div className="w-full  mx-2">
+                        <div className="my-2 p-1 bg-white flex border border-gray-200 rounded">
+                          <input
+                            placeholder="Altura"
+                            className="p-1 px-2 appearance-none outline-none w-full text-gray-800 "
+                          />{" "}
                         </div>
-                        <div className="flex flex-col md:flex-row pb-4 mb-4">
-                            <div className="w-64 font-bold h-6 mx-2 mt-3 text-gray-800">Datos de contacto
-                            <div><button type="button" className="mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-5 rounded focus:outline-none focus:shadow-outline">+</button></div>
+                      </div>
+                      <div className="w-full  mx-2">
+                        <div className="my-2 p-1 bg-white flex border border-gray-200 rounded">
+                          <input
+                            placeholder="Código postal"
+                            className="p-1 px-2 appearance-none outline-none w-full text-gray-800 "
+                          />{" "}
                         </div>
-                            <div className="border-b border-gray-200">
-                                <div className="flex flex-col md:flex-row">
-                                    <div className="w-full  mx-2">
-                                        <div className="my-2 p-1 bg-white flex border border-gray-200 rounded">
-                                            <input 
-                                            placeholder="Nombre del contacto" 
-                                            name="nombre"
-                                            value={nombre}
-                                            onChange={onChange}
-                                            className="p-1 px-2 appearance-none outline-none w-full text-gray-800 " /> </div>
-                                    </div>
-                                    <div className="w-full  mx-2">
-                                        <div className="my-2 p-1 bg-white flex border border-gray-200 rounded">
-                                            <input 
-                                            placeholder="Email" 
-                                            name="email" 
-                                            value={email}
-                                            onChange={onChange}
-                                            className="p-1 px-2 appearance-none outline-none w-full text-gray-800 " /> </div>
-                                    </div>
-                                    <div className="w-full  mx-2">
-                                        <div className="my-2 p-1 bg-white flex border border-gray-200 rounded">
-                                            <input 
-                                            placeholder="Teléfono" 
-                                            name="telefono" 
-                                            value={telefono}
-                                            onChange={onChange}
-                                            className="p-1 px-2 appearance-none outline-none w-full text-gray-800 " /> </div>
-                                    </div>
-                                    <div className="w-full  mx-2">
-                                        <div className="my-2 p-1 bg-white flex border border-gray-200 rounded">
-                                            <input 
-                                            placeholder="Área o Sector" 
-                                            name="area"
-                                            value={area}
-                                            onChange={onChange}
-                                            className="p-1 px-2 appearance-none outline-none w-full text-gray-800 " /> </div>
-                                    </div>
-                                    <div className="w-full mx-2 flex items-center justify-center">
-                                        <button type="button" 
-                                        className="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline">Eliminar</button>
-                                    </div>
-                                </div>
-
-                            </div>
+                      </div>
+                    </div>
+                    <div className="m-2">
+                      <div className="w-full ">
+                        <div className="my-2 p-1 bg-white flex border border-gray-200 rounded">
+                          <input
+                            placeholder="Barrio o Localidad"
+                            className="p-1 px-2 appearance-none outline-none w-full text-gray-800 "
+                          />{" "}
                         </div>
-                        <div className="flex flex-col md:flex-row">
-                            <div className="w-64 mx-2 font-bold h-6 mt-3 text-gray-800" />
-                            <div className=" flex flex-col md:flex-row">
-
-                                <button className="text-sm  mx-2 w-32  focus:outline-none flex justify-center px-4 py-2 rounded font-bold cursor-pointer 
+                      </div>
+                    </div>
+                  </div>
+              </div>
+            </div>
+            <div className="flex flex-col md:flex-row pb-4 mb-4">
+              <div className="w-64 font-bold h-6 mx-2 mt-3 text-gray-800">
+                Datos de contacto
+                <div>
+                  <button
+                    type="button"
+                    className="mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-5 rounded focus:outline-none focus:shadow-outline"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+              <div className="border-b border-gray-200">
+                <div className="flex flex-col md:flex-row">
+                  <div className="w-full  mx-2">
+                    <div className="my-2 p-1 bg-white flex border border-gray-200 rounded">
+                      <input
+                        placeholder="Nombre del contacto"
+                        name="nombre"
+                        value={nombre}
+                        onChange={onChange}
+                        className="p-1 px-2 appearance-none outline-none w-full text-gray-800 "
+                      />{" "}
+                    </div>
+                  </div>
+                  <div className="w-full  mx-2">
+                    <div className="my-2 p-1 bg-white flex border border-gray-200 rounded">
+                      <input
+                        placeholder="Email"
+                        name="email"
+                        value={email}
+                        onChange={onChange}
+                        className="p-1 px-2 appearance-none outline-none w-full text-gray-800 "
+                      />{" "}
+                    </div>
+                  </div>
+                  <div className="w-full  mx-2">
+                    <div className="my-2 p-1 bg-white flex border border-gray-200 rounded">
+                      <input
+                        placeholder="Teléfono"
+                        name="telefono"
+                        value={telefono}
+                        onChange={onChange}
+                        className="p-1 px-2 appearance-none outline-none w-full text-gray-800 "
+                      />{" "}
+                    </div>
+                  </div>
+                  <div className="w-full  mx-2">
+                    <div className="my-2 p-1 bg-white flex border border-gray-200 rounded">
+                      <input
+                        placeholder="Área o Sector"
+                        name="area"
+                        value={area}
+                        onChange={onChange}
+                        className="p-1 px-2 appearance-none outline-none w-full text-gray-800 "
+                      />{" "}
+                    </div>
+                  </div>
+                  <div className="w-full mx-2 flex items-center justify-center">
+                    <button
+                      type="button"
+                      className="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
+                    >
+                      Eliminar
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="flex flex-col md:flex-row">
+              <div className="w-64 mx-2 font-bold h-6 mt-3 text-gray-800" />
+              <div className=" flex flex-col md:flex-row">
+                <button
+                  className="text-sm  mx-2 w-32  focus:outline-none flex justify-center px-4 py-2 rounded font-bold cursor-pointer 
         hover:bg-red-700 hover:text-teal-100 
         bg-red-300 
         text-gray-700 
         border duration-200 ease-in-out 
-        border-teal-600 transition">Cancelar</button>
-                                <button className="text-sm  mx-2 w-32  focus:outline-none flex justify-center px-4 py-2 rounded font-bold cursor-pointer 
+        border-teal-600 transition"
+                >
+                  Cancelar
+                </button>
+                <button
+                  className="text-sm  mx-2 w-32  focus:outline-none flex justify-center px-4 py-2 rounded font-bold cursor-pointer 
         hover:bg-teal-700 hover:text-teal-100 
         bg-teal-100 
         text-teal-700 
         border duration-200 ease-in-out 
-        border-teal-600 transition">Actualizar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        border-teal-600 transition"
+                >
+                  Actualizar
+                </button>
+              </div>
             </div>
-        </>
-    );
-}
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
 
 export default EditarCliente;

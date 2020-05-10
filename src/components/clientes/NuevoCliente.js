@@ -64,13 +64,13 @@ const NuevoCliente = () => {
                         </div>
                         <div className="mb-4">
                             <label className="block text-grey-darker text-md  mb-2" htmlFor="username">
-                                Usuario
+                                CUIT (Usuario)
                         </label>
                             <input className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker"
                                 id="username"
                                 type="text"
                                 name="username"
-                                placeholder="Usuario"
+                                placeholder="CUIT (Usuario)"
                                 onChange={onChange}
                                 value={username}
                             />
