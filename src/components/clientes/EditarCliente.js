@@ -68,9 +68,10 @@ const EditarCliente = () => {
         <DireccionCliente direcciones={datosCliente.direccion} />
         <DatosContactoCliente datos={datosCliente.datosContacto} />
 
-        {/* Archivos, ver como gestionar */}
+        <Archivos />
+
       </div>
-    </>
+      </>
   );
 };
 
