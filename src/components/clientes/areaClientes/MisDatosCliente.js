@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import DireccionCliente from "./DireccionCliente";
-import DatosContactoCliente from "./DatosContactoCliente";
+import Direccion from "./Direccion";
+import DatosContacto from "./DatosContacto";
 import Archivos from "./Archivos";
 
-const EditarCliente = () => {
+const MisDatosCliente = () => {
   // Obtener id cliente de props
 
   const datosCliente = {
@@ -48,13 +48,13 @@ const EditarCliente = () => {
     <>
       <div className="w-full overflow-hidden p-5 text-gray-900">
         <div className="p-4 flex justify-center w-full text-gray-900">
-          <h1 className="text-3xl">Editar Cliente</h1>
+          <h1 className="text-3xl">Mis Datos</h1>
         </div>
 
         <div className="flex flex-col md:flex-row justify-around border-b border-gray-200 pb-4 mb-4">
           <div className="w-full flex items-center justify-center mx-5">
             <p className="text-xl">
-              Nombre del cliente:{" "}
+              Nombre de mi empresa:{" "}
               <span className="font-bold">{datosCliente.nombreEmpresa}</span>
             </p>
           </div>
@@ -65,13 +65,14 @@ const EditarCliente = () => {
           </div>
         </div>
 
-        <DireccionCliente direcciones={datosCliente.direccion} />
-        <DatosContactoCliente datos={datosCliente.datosContacto} />
+        <Direccion direcciones={datosCliente.direccion} />
+        <DatosContacto datos={datosCliente.datosContacto} />
 
-        {/* Archivos, ver como gestionar */}
+        <Archivos />
+
       </div>
     </>
   );
 };
 
-export default EditarCliente;
+export default MisDatosCliente;

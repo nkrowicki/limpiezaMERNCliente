@@ -22,6 +22,9 @@ const Navbar = () => {
                                     <NavLink to={'/nuevo-cliente'} exact activeClassName="text-white" className="inline-block no-underline hover:text-gray-200 hover:text-underline py-2 px-4">Nuevo Cliente</NavLink>
                                 </li>
                                 <li className="md:mr-3">
+                                    <NavLink to={'/mis-datos'} exact activeClassName="text-white" className="inline-block no-underline hover:text-gray-200 hover:text-underline py-2 px-4">Mis datos</NavLink>
+                                </li>
+                                <li className="md:mr-3">
                                     <NavLink to={'/'} className="inline-block no-underline hover:text-gray-200 hover:text-underline py-2 px-4">Salir</NavLink>
                                 </li>
                             </ul>

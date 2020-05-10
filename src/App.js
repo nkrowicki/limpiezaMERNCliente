@@ -6,6 +6,7 @@ import NuevoCliente from './components/clientes/NuevoCliente';
 import ListadoClientes from './components/clientes/ListadoClientes';
 import Layout from './components/layout/Layout';
 import EditarCliente from './components/clientes/EditarCliente';
+import MisDatosCliente from './components/clientes/areaClientes/MisDatosCliente';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route exact path="/clientes" component={ListadoClientes} />
           <Route exact path="/nuevo-cliente" component={NuevoCliente} />
           <Route exact path="/editar-cliente/" component={EditarCliente} />
+          <Route exact path="/mis-datos/" component={MisDatosCliente} />
 
           {/* <RutaPrivada exact path="/clientes" component={Clientes} /> */}
 
