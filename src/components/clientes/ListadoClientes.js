@@ -1,82 +1,33 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 
 const ListadoClientes = () => {
+  const history = useHistory();
+
   const clientes = [
     {
       id: 1,
       nombreEmpresa: "Nubedi",
       cuit: 307080,
-      direccion: [
-        {
-          id: 1,
-          calle: "Rivadavia",
-          altura: 10,
-          codPostal: 100,
-          localidad: "Ramos Mejía",
-        },
-        {
-          id: 2,
-          calle: "Alsina",
-          altura: 20,
-          codPostal: 200,
-          localidad: "Caseros",
-        },
-      ],
-      datosContacto: [
-        {
-          id: 1,
-          nombre: "Nahuel",
-          email: "nkrowicki@nubedi.com",
-          tel: "4545-4545",
-          area: "Sistemas",
-        },
-        {
-          id: 2,
-          nombre: "Jorge",
-          email: "jorge@nubedi.com",
-          tel: "123-123",
-          area: "Finanzas",
-        },
-      ],
     },
     {
-      id: 1,
+      id: 2,
       nombreEmpresa: "Empresa Dos",
       cuit: 206070,
-      direccion: [
-        {
-          id: 1,
-          calle: "Esa",
-          altura: 10,
-          codPostal: 100,
-          localidad: "Sin Mejía",
-        },
-        {
-          id: 2,
-          calle: "Caseros",
-          altura: 20,
-          codPostal: 200,
-          localidad: "Ze ",
-        },
-      ],
-      datosContacto: [
-        {
-          id: 1,
-          nombre: "Pepe",
-          email: "pepe@asd.com",
-          tel: "4545-4545",
-          area: "Sistemas",
-        },
-        {
-          id: 2,
-          nombre: "pedro",
-          email: "pedro@asd.com",
-          tel: "123-123",
-          area: "Finanzas",
-        },
-      ],
     },
   ];
+
+  const editarCliente = (id) => {
+    console.log("editar cliente: ", id);
+
+    // Agregar al state el id de cliente a editar
+
+    // Redirect a editar-cliente
+    history.push({
+      pathname: "/editar-cliente",
+      state: { id},
+    });
+  };
 
   return (
     <>
@@ -101,7 +52,7 @@ const ListadoClientes = () => {
                     <button
                       type="button"
                       className="mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
-                        // onClick={() => editarCliente(datos)}
+                      onClick={() => editarCliente(datos.id)}
                     >
                       Editar
                     </button>

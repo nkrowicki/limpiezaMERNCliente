@@ -3,8 +3,15 @@ import DireccionCliente from "./DireccionCliente";
 import DatosContactoCliente from "./DatosContactoCliente";
 import Archivos from "./Archivos";
 
-const EditarCliente = () => {
+const EditarCliente = ({location}) => {
+
   // Obtener id cliente de props
+  const id = location.state.id;
+
+  // Fetch datosCliente (id, nombreEmpresa y cuit)
+  // Fetch direccion (array) -> Acá o en el componente que sigue? 
+  // Fetch datosContacto (array)
+  
 
   const datosCliente = {
     id: 1,
