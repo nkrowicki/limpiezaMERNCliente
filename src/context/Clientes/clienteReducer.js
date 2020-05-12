@@ -2,6 +2,8 @@ import {
   OBTENER_CLIENTES,
   AGREGAR_CLIENTE,
   CLIENTE_ACTUAL,
+  OBTENER_DIRECCIONES,
+  OBTENER_DATOSCONTACTO,
 } from "../../types/";
 
 export default (state, action) => {
@@ -13,6 +15,20 @@ export default (state, action) => {
         cliente: null,
       };
 
+      case OBTENER_DIRECCIONES:
+        return {
+          ...state,
+          direcciones: action.payload.filter((direccion)=> direccion.idCliente == state.cliente.id),
+        };
+
+        case OBTENER_DATOSCONTACTO:
+        return {
+          ...state,
+          datosContacto: action.payload.filter((datosContacto)=> datosContacto.idCliente == state.cliente.id),
+        };
+
+        
+
     case CLIENTE_ACTUAL:
         return {
             ...state,
@@ -23,13 +39,14 @@ export default (state, action) => {
         }),
       };
 
+      
     case AGREGAR_CLIENTE:
       // console.log(action)
       // console.log([...state.clientes, action.payload])
       return {
         ...state,
-        clientes: [...state.clientes, action.payload],
         cliente: null,
+        clientes: [...state.clientes, action.payload],
       };
 
     default:

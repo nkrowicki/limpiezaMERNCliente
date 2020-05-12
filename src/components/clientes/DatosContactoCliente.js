@@ -1,9 +1,15 @@
-import React, { useState } from "react";
-import FormNuevosDatos from "./FormNuevosDatos";
+import React, { useState, useEffect, useContext } from "react";
 import Swal from "sweetalert2";
+import clienteContext from '../../context/Clientes/clienteContext';
+import FormNuevosDatos from "./FormNuevosDatos";
 
 
-const DatosContactoCliente = ({ datos }) => {
+const DatosContactoCliente = () => {
+
+
+  const clientesContext = useContext(clienteContext);
+  const { datosContacto } = clientesContext;
+
   const initialState = {
     id: "",
     calle: "",
@@ -12,10 +18,18 @@ const DatosContactoCliente = ({ datos }) => {
     localidad: "",
   };
 
-  const [data, setData] = useState(datos);
+  const [data, setData] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [stateNewData, setStateNewData] = useState(initialState);
   const [editar, setEditar] = useState(false);
+
+
+  useEffect(() => {
+    if(datosContacto !== null || datosContacto !== [])
+    setData(datosContacto)
+  }, [datosContacto])
+
+
 
   const limpiarForm = () => {
     setStateNewData(initialState);

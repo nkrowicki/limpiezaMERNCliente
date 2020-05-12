@@ -7,6 +7,8 @@ import {
   OBTENER_CLIENTES,
   AGREGAR_CLIENTE,
   CLIENTE_ACTUAL,
+  OBTENER_DIRECCIONES,
+  OBTENER_DATOSCONTACTO
 } from "../../types/";
 
 const ClienteState = (props) => {
@@ -28,9 +30,97 @@ const ClienteState = (props) => {
     },
   ];
 
+  const direcciones = [
+    {
+      id: 1,
+      calle: "Rivadavia",
+      altura: 10,
+      codPostal: 100,
+      localidad: "Ramos Mejía",
+      idCliente: 1
+    },
+    {
+      id: 2,
+      calle: "Alsina",
+      altura: 20,
+      codPostal: 200,
+      localidad: "Caseros",
+      idCliente: 1
+    },
+    {
+      id: 3,
+      calle: "Belgrano",
+      altura: 30,
+      codPostal: 300,
+      localidad: "Loma Hermosa",
+      idCliente: 2
+    },
+    {
+      id: 4,
+      calle: "Urquiza",
+      altura: 40,
+      codPostal: 400,
+      localidad: "Mar de ajo",
+      idCliente: 2
+    },
+    {
+      id: 5,
+      calle: "Pedro Goyena",
+      altura: 50,
+      codPostal: 500,
+      localidad: "Lomas del mirador",
+      idCliente: 3
+    },
+  ];
+
+  const datosContacto = [
+    {
+      id: 1,
+      nombre: "Nahuel",
+      email: "nkrowicki@nubedi.com",
+      tel: "1565599196",
+      area: "Sistemas",
+      idCliente: 1
+    },
+    {
+      id: 2,
+      nombre: "Jorge",
+      email: "jorge@nubedi.com",
+      tel: "123123",
+      area: "Finanzas",
+      idCliente: 2
+    },
+    {
+      id: 3,
+      nombre: "Pepe",
+      email: "nkrowicki@nubedi.com",
+      tel: "45454545",
+      area: "Compras",
+      idCliente: 1
+    },
+    {
+      id: 4,
+      nombre: "Pablo",
+      email: "jorge@nubedi.com",
+      tel: "123123",
+      area: "Finanzas",
+      idCliente: 2
+    },
+    {
+      id: 5,
+      nombre: "Marcelo",
+      email: "nkrowicki@nubedi.com",
+      tel: "45454545",
+      area: "Administracion",
+      idCliente: 3
+    },
+  ]
+
   const initialState = {
     clientes: [],
     cliente: null,
+    direcciones: [],
+    datosContacto: []
   };
 
   // Dispatch para ejecutar las acciones
@@ -45,6 +135,22 @@ const ClienteState = (props) => {
       payload: clientes,
     });
   };
+
+  const obtenerDireccionesFn = () => {
+    dispatch({
+      type: OBTENER_DIRECCIONES,
+      payload: direcciones
+    })
+  }
+
+  const obtenerDatosContactoFn = () => {
+    dispatch({
+      type: OBTENER_DATOSCONTACTO,
+      payload: datosContacto
+    })
+  }
+
+  
 
   // Agregar nuevo cliente
   const agregarClienteFn = (cliente) => {
@@ -68,9 +174,13 @@ const ClienteState = (props) => {
       value={{
         clientes: state.clientes,
         cliente: state.cliente,
+        direcciones: state.direcciones,
+        datosContacto: state.datosContacto,
         obtenerClientesFn,
         agregarClienteFn,
-        clienteActualFn
+        clienteActualFn,
+        obtenerDireccionesFn,
+        obtenerDatosContactoFn
       }}
     >
       {props.children}

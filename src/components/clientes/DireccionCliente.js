@@ -1,8 +1,14 @@
-import React, { useState } from "react";
-import FormNuevaDireccion from "./FormNuevaDireccion";
+import React, { useState, useContext, useEffect } from "react";
 import Swal from "sweetalert2";
+import clienteContext from '../../context/Clientes/clienteContext';
+import FormNuevaDireccion from "./FormNuevaDireccion";
 
-const DireccionCliente = ({ direcciones }) => {
+const DireccionCliente = () => {
+
+  
+  const clientesContext = useContext(clienteContext);
+  const { direcciones } = clientesContext;
+  
   const initialState = {
     id: "",
     calle: "",
@@ -10,11 +16,17 @@ const DireccionCliente = ({ direcciones }) => {
     codPostal: "",
     localidad: "",
   };
-
-  const [data, setData] = useState(direcciones);
-  const [showForm, setShowForm] = useState(false);
+  
+  const [data, setData] = useState([]);
   const [stateNewData, setStateNewData] = useState(initialState);
+  const [showForm, setShowForm] = useState(false);
   const [editar, setEditar] = useState(false);
+
+  useEffect(() => {
+    if(direcciones !== null || direcciones !== [])
+    setData(direcciones)
+  }, [direcciones])
+
 
   const limpiarForm = () => {
     setStateNewData(initialState);

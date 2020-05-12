@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import clienteContext from "../../context/Clientes/clienteContext";
 
@@ -9,14 +9,20 @@ const ListadoClientes = () => {
 
   const { clientes, obtenerClientesFn, clienteActualFn } = clientesContext;
 
-  // Obtener tareas cuando carga el componente
+  const [data, setData] = useState([]);
+  
   useEffect(() => {
     obtenerClientesFn();
+  }, [])
 
-    //eslint-disable-nextline
-  }, []);
+  useEffect(() => {
+    if(clientes !== null || clientes !== [])
+    setData(clientes);
+  }, [clientes])
 
-  if (clientes.length === 0)
+
+
+  if (data.length === 0)
     return (
       <>
         <div className="p-4 flex justify-center w-full text-gray-900">
@@ -48,7 +54,7 @@ const ListadoClientes = () => {
             </tr>
           </thead>
           <tbody>
-            {clientes.map((datos) => {
+            {data.map((datos) => {
               return (
                 <tr className="lg:hover:bg-gray-100" key={datos.id}>
                   <td className="border px-4 py-2">{datos.nombre}</td>

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import clienteContext from "../../context/Clientes/clienteContext";
 
@@ -10,53 +10,30 @@ const EditarCliente = () => {
   const history = useHistory();
 
   const clientesContext = useContext(clienteContext);
-  const { cliente } = clientesContext;
+  // Datos principales (cuit, nombre, id)
+  const {
+    cliente,
+    obtenerDireccionesFn,
+    obtenerDatosContactoFn,
+  } = clientesContext;
+
+  // Hay cliente seleccionado?
+  const hayClienteSeleccionado = !cliente || cliente === null ? false : true;
+
+  useEffect(() => {
+    if (hayClienteSeleccionado) {
+      obtenerDireccionesFn();
+      obtenerDatosContactoFn();
+    }
+  }, []);
 
   //Si no hay id
-  if (!cliente || cliente === null) {
+  if (!hayClienteSeleccionado) {
     history.push({
       pathname: "/clientes",
     });
     return null;
   }
-
-  // Fetch direccion (array) -> Acá o en el componente que sigue?
-  // Fetch datosContacto (array)
-
-  const datosCliente = {
-    direccion: [
-      {
-        id: 1,
-        calle: "Rivadavia",
-        altura: 10,
-        codPostal: 100,
-        localidad: "Ramos Mejía",
-      },
-      {
-        id: 2,
-        calle: "Alsina",
-        altura: 20,
-        codPostal: 200,
-        localidad: "Caseros",
-      },
-    ],
-    datosContacto: [
-      {
-        id: 1,
-        nombre: "Nahuel",
-        email: "nkrowicki@nubedi.com",
-        tel: "4545-4545",
-        area: "Sistemas",
-      },
-      {
-        id: 2,
-        nombre: "Jorge",
-        email: "jorge@nubedi.com",
-        tel: "123-123",
-        area: "Finanzas",
-      },
-    ],
-  };
 
   return (
     <>
@@ -79,10 +56,11 @@ const EditarCliente = () => {
           </div>
         </div>
 
-        <DireccionCliente direcciones={datosCliente.direccion} />
-        <DatosContactoCliente datos={datosCliente.datosContacto} />
+        <DireccionCliente />
+        <DatosContactoCliente />
 
         <Archivos />
+        
       </div>
     </>
   );
