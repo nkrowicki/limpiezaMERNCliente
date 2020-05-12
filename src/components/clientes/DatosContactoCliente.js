@@ -8,19 +8,19 @@ const DatosContactoCliente = () => {
 
 
   const clientesContext = useContext(clienteContext);
-  const { datosContacto } = clientesContext;
+  const { datosContacto, agregarContactoFn } = clientesContext;
 
   const initialState = {
-    id: "",
-    calle: "",
-    altura: "",
-    codPostal: "",
-    localidad: "",
+    id: null,
+    nombre: "",
+    email: "",
+    tel: "",
+    area: "",
   };
 
   const [data, setData] = useState([]);
   const [showForm, setShowForm] = useState(false);
-  const [stateNewData, setStateNewData] = useState(initialState);
+  const [stateNewData, setStateNewData] = useState({initialState});
   const [editar, setEditar] = useState(false);
 
 
@@ -119,14 +119,13 @@ const DatosContactoCliente = () => {
         </table>
       </div>
       <FormNuevosDatos
-        data={data}
-        setData={setData}
         showForm={showForm}
         setShowForm={setShowForm}
         limpiarForm={limpiarForm}
         stateNewData={stateNewData}
         setStateNewData={setStateNewData}
         editar={editar}
+        agregarContactoFn={agregarContactoFn}
       />
 
       <div className="mt-5 border-b-2" />

@@ -7,7 +7,7 @@ const DireccionCliente = () => {
 
   
   const clientesContext = useContext(clienteContext);
-  const { direcciones } = clientesContext;
+  const { direcciones, agregarDireccionFn } = clientesContext;
   
   const initialState = {
     id: "",
@@ -124,6 +124,7 @@ const DireccionCliente = () => {
         stateNewData={stateNewData}
         setStateNewData={setStateNewData}
         editar={editar}
+        agregarDireccionFn={agregarDireccionFn}
       />
 
       <div className="mt-5 border-b-2" />

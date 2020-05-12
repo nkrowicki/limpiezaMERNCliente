@@ -2,19 +2,18 @@ import React, { useState, useEffect } from "react";
 import Swal from "sweetalert2";
 
 const FormNuevosDatos = ({
-  data,
-  setData,
   showForm,
   setShowForm,
   stateNewData,
   limpiarForm,
   editar,
+  agregarContactoFn
 }) => {
 
 
   const [nuevosDatos, setnuevosDatos] = useState(stateNewData);
 
-  const { id, nombre, email, tel, area } = nuevosDatos;
+  const {  nombre, email, tel, area } = nuevosDatos;
 
   useEffect(() => {
     setnuevosDatos(stateNewData);
@@ -28,6 +27,7 @@ const FormNuevosDatos = ({
   };
 
   const agregarDatos = async () => {
+
     //Verificar datos
     if (
       nombre.trim() === "" ||
@@ -43,13 +43,9 @@ const FormNuevosDatos = ({
       return false;
     }
 
-    //Agregar a la bbdd
 
-    //Id retornado por la bbdd
-    const idNuevo = isNaN(id) && 11;
-
-    //Agregar a la tabla (con el id para 'key' de map) o lo de abajo (fetch nuevamente)
-    setData([...data, { ...nuevosDatos, id: idNuevo }]);
+    // Agregar a la bbdd
+    agregarContactoFn(nuevosDatos, editar);
 
     //Si se agrego correctamente a la base de datos
     Swal.fire("Datos agregados!", "", "success");

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Swal from "sweetalert2";
 
+
 const FormNuevaDireccion = ({
   data,
   setData,
@@ -9,6 +10,7 @@ const FormNuevaDireccion = ({
   stateNewData,
   limpiarForm,
   editar,
+  agregarDireccionFn
 }) => {
     
   function isNumeric(value) {
@@ -17,7 +19,7 @@ const FormNuevaDireccion = ({
 
   const [nuevaDireccion, setNuevaDireccion] = useState(stateNewData);
 
-  const { id, calle, altura, codPostal, localidad } = nuevaDireccion;
+  const { calle, altura, codPostal, localidad } = nuevaDireccion;
 
   useEffect(() => {
     setNuevaDireccion(stateNewData);
@@ -49,12 +51,10 @@ const FormNuevaDireccion = ({
     }
 
     //Agregar a la bbdd
-
-    //Id retornado por la bbdd
-    const idNuevo = isNaN(id) && 11;
+    agregarDireccionFn(nuevaDireccion, editar);
 
     //Agregar a la tabla (con el id para 'key' de map) o lo de abajo (fetch nuevamente)
-    setData([...data, { ...nuevaDireccion, id: idNuevo }]);
+    // setData([...data, { ...nuevaDireccion }]);
 
     //Si se agrego correctamente a la base de datos
     Swal.fire("Dirección agregada!", "", "success");
