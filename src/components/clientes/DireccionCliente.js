@@ -10,7 +10,7 @@ const DireccionCliente = () => {
   const { direcciones, agregarDireccionFn, eliminarDireccionFn } = clientesContext;
   
   const initialState = {
-    id: "",
+    id: null,
     calle: "",
     altura: "",
     codPostal: "",
