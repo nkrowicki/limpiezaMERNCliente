@@ -1,26 +1,25 @@
 import React, { useContext, useState, useEffect } from "react";
+import Swal from "sweetalert2";
 import { useHistory } from "react-router-dom";
 import clienteContext from "../../context/Clientes/clienteContext";
+
 
 const ListadoClientes = () => {
   const history = useHistory();
 
   const clientesContext = useContext(clienteContext);
 
-  const { clientes, obtenerClientesFn, clienteActualFn } = clientesContext;
+  const { clientes, obtenerClientesFn, clienteActualFn, eliminarClienteFn } = clientesContext;
 
   const [data, setData] = useState([]);
-  
+
   useEffect(() => {
     obtenerClientesFn();
-  }, [])
+  }, []);
 
   useEffect(() => {
-    if(clientes !== null || clientes !== [])
-    setData(clientes);
-  }, [clientes])
-
-
+    if (clientes !== null || clientes !== []) setData(clientes);
+  }, [clientes]);
 
   if (data.length === 0)
     return (
@@ -39,6 +38,29 @@ const ListadoClientes = () => {
       pathname: "/editar-cliente",
       state: { id: "prueba" },
     });
+  };
+
+  const deleteCliente = (id) => {
+    
+    Swal.fire({
+      title: "¿Está seguro?",
+      text: "Esta acción no se puede deshacer. Si acepta eliminará todos los datos asociados a este cliente.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Si, eliminar!",
+    }).then((result) => {
+      if (result.value) {
+        
+        // Eliminar de la bbdd pasando id
+        eliminarClienteFn(id);
+      
+        // Informar que se eliminó con éxito
+        Swal.fire("Eliminado!", "El cliente ha sido eliminado con éxito.", "success");
+      }
+    });
+
   };
 
   return (
@@ -71,6 +93,7 @@ const ListadoClientes = () => {
                     <button
                       type="button"
                       className="mt-2 md:mt-0 text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
+                      onClick={() => deleteCliente(datos.id)}
                     >
                       Eliminar
                     </button>

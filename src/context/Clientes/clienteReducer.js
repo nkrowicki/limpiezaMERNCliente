@@ -1,13 +1,16 @@
 import {
   OBTENER_CLIENTES,
   AGREGAR_CLIENTE,
+  ELIMINAR_CLIENTE,
   CLIENTE_ACTUAL,
   OBTENER_DIRECCIONES,
   OBTENER_DATOSCONTACTO,
   AGREGAR_DIRECCION,
   EDITAR_DIRECCION,
+  ELIMINAR_DIRECCION,
   AGREGAR_CONTACTO,
   EDITAR_CONTACTO,
+  ELIMINAR_CONTACTO,
 } from "../../types/";
 
 export default (state, action) => {
@@ -19,6 +22,20 @@ export default (state, action) => {
         cliente: null,
         direcciones: [],
         datosContacto: [],
+      };
+
+      case ELIMINAR_CLIENTE:
+      return {
+        ...state,
+        clientes: state.clientes.filter(
+          (cliente) => cliente.id !== action.payload
+        ),
+        direcciones: state.direcciones.filter(
+          (direccion) => direccion.idCliente !== action.payload
+        ),
+        datosContacto: state.datosContacto.filter(
+          (dato) => dato.idCliente !== action.payload
+        ),
       };
 
     case OBTENER_DIRECCIONES:
@@ -63,8 +80,8 @@ export default (state, action) => {
         ...state,
         direcciones: [...state.direcciones, direccion],
       };
-      
-      case EDITAR_DIRECCION:
+
+    case EDITAR_DIRECCION:
       const direccionAEditar = action.payload;
       const direccionActualizada = state.direcciones.map((direccion) =>
         direccion.id === direccionAEditar.id ? direccionAEditar : direccion
@@ -72,6 +89,14 @@ export default (state, action) => {
       return {
         ...state,
         direcciones: direccionActualizada,
+      };
+
+      case ELIMINAR_DIRECCION:
+      return {
+        ...state,
+        direcciones: state.direcciones.filter(
+          (direccion) => direccion.id !== action.payload
+        ),
       };
 
     case AGREGAR_CONTACTO:
@@ -90,6 +115,14 @@ export default (state, action) => {
       return {
         ...state,
         datosContacto: datosActualizados,
+      };
+
+    case ELIMINAR_CONTACTO:
+      return {
+        ...state,
+        datosContacto: state.datosContacto.filter(
+          (dato) => dato.id !== action.payload
+        ),
       };
 
     default:

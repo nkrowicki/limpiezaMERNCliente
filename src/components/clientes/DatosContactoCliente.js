@@ -8,7 +8,7 @@ const DatosContactoCliente = () => {
 
 
   const clientesContext = useContext(clienteContext);
-  const { datosContacto, agregarContactoFn } = clientesContext;
+  const { datosContacto, agregarContactoFn, eliminarDatoContactoFn } = clientesContext;
 
   const initialState = {
     id: null,
@@ -55,14 +55,8 @@ const DatosContactoCliente = () => {
       if (result.value) {
         
         // Eliminar de la bbdd pasando id
-
-
-        // Si se eliminó bien.. eliminar del array para actualizar la vista
-        const nuevaData = data.filter((item) => item.id !== datos.id);
-        setData([
-          ...nuevaData,
-        ]);
-       
+        eliminarDatoContactoFn(datos.id);
+      
         // Informar que se eliminó con éxito
         Swal.fire("Eliminado!", "Se ha eliminado con éxito.", "success");
       }

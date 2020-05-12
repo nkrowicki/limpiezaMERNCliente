@@ -6,13 +6,16 @@ import clienteReducer from "./clienteReducer";
 import {
   OBTENER_CLIENTES,
   AGREGAR_CLIENTE,
+  ELIMINAR_CLIENTE,
   CLIENTE_ACTUAL,
   OBTENER_DIRECCIONES,
   OBTENER_DATOSCONTACTO,
   AGREGAR_DIRECCION,
   EDITAR_DIRECCION,
+  ELIMINAR_DIRECCION,
   AGREGAR_CONTACTO,
   EDITAR_CONTACTO,
+  ELIMINAR_CONTACTO
 } from "../../types/";
 
 const ClienteState = (props) => {
@@ -140,6 +143,13 @@ const ClienteState = (props) => {
     });
   };
 
+  const eliminarClienteFn = (id) => {
+    dispatch({
+      type: ELIMINAR_CLIENTE,
+      payload: id
+    })
+  }
+
   const obtenerDireccionesFn = () => {
     dispatch({
       type: OBTENER_DIRECCIONES,
@@ -181,6 +191,14 @@ const ClienteState = (props) => {
     }
   };
 
+  // Eliminar una direccion
+  const eliminarDireccionFn = (id) => {
+    dispatch({
+      type: ELIMINAR_DIRECCION,
+      payload: id,
+    });
+  };
+
   // Agregar o actualizar dato de contacto
   const agregarContactoFn = (contacto, editar) => {
     // Si esta editando
@@ -197,6 +215,14 @@ const ClienteState = (props) => {
         payload: contacto,
       });
     }
+  };
+
+  // Eliminar un dato de contacto
+  const eliminarDatoContactoFn = (id) => {
+    dispatch({
+      type: ELIMINAR_CONTACTO,
+      payload: id,
+    });
   };
 
   // Seleccionar proyecto a editar
@@ -221,6 +247,9 @@ const ClienteState = (props) => {
         obtenerDatosContactoFn,
         agregarDireccionFn,
         agregarContactoFn,
+        eliminarDatoContactoFn,
+        eliminarDireccionFn,
+        eliminarClienteFn
       }}
     >
       {props.children}
