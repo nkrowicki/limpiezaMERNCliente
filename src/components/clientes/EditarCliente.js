@@ -1,22 +1,29 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
+import { useHistory } from "react-router-dom";
+import clienteContext from "../../context/Clientes/clienteContext";
+
 import DireccionCliente from "./DireccionCliente";
 import DatosContactoCliente from "./DatosContactoCliente";
 import Archivos from "./Archivos";
 
-const EditarCliente = ({location}) => {
+const EditarCliente = () => {
+  const history = useHistory();
 
-  // Obtener id cliente de props
-  const id = location.state.id;
+  const clientesContext = useContext(clienteContext);
+  const { cliente } = clientesContext;
 
-  // Fetch datosCliente (id, nombreEmpresa y cuit)
-  // Fetch direccion (array) -> Acá o en el componente que sigue? 
+  //Si no hay id
+  if (!cliente || cliente === null) {
+    history.push({
+      pathname: "/clientes",
+    });
+    return null;
+  }
+
+  // Fetch direccion (array) -> Acá o en el componente que sigue?
   // Fetch datosContacto (array)
-  
 
   const datosCliente = {
-    id: 1,
-    nombreEmpresa: "Nubedi",
-    cuit: 1010101010,
     direccion: [
       {
         id: 1,
@@ -62,12 +69,12 @@ const EditarCliente = ({location}) => {
           <div className="w-full flex items-center justify-center mx-5">
             <p className="text-xl">
               Nombre del cliente:{" "}
-              <span className="font-bold">{datosCliente.nombreEmpresa}</span>
+              <span className="font-bold">{cliente.nombre}</span>
             </p>
           </div>
           <div className="w-full flex flex-row items-center justify-center mx-5">
             <p className="text-xl">
-              Cuit: <span className="font-bold">{datosCliente.cuit}</span>
+              Cuit: <span className="font-bold">{cliente.cuit}</span>
             </p>
           </div>
         </div>
@@ -76,9 +83,8 @@ const EditarCliente = ({location}) => {
         <DatosContactoCliente datos={datosCliente.datosContacto} />
 
         <Archivos />
-
       </div>
-      </>
+    </>
   );
 };
 

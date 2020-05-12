@@ -8,7 +8,7 @@ const MisDatosCliente = () => {
 
   const datosCliente = {
     id: 1,
-    nombreEmpresa: "Nubedi",
+    nombre: "Nubedi",
     cuit: 1010101010,
     direccion: [
       {
@@ -55,7 +55,7 @@ const MisDatosCliente = () => {
           <div className="w-full flex items-center justify-center mx-5">
             <p className="text-xl">
               Nombre de mi empresa:{" "}
-              <span className="font-bold">{datosCliente.nombreEmpresa}</span>
+              <span className="font-bold">{datosCliente.nombre}</span>
             </p>
           </div>
           <div className="w-full flex flex-row items-center justify-center mx-5">

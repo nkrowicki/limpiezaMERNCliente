@@ -1,31 +1,37 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import clienteContext from "../../context/Clientes/clienteContext";
 
 const ListadoClientes = () => {
   const history = useHistory();
 
-  const clientes = [
-    {
-      id: 1,
-      nombreEmpresa: "Nubedi",
-      cuit: 307080,
-    },
-    {
-      id: 2,
-      nombreEmpresa: "Empresa Dos",
-      cuit: 206070,
-    },
-  ];
+  const clientesContext = useContext(clienteContext);
+
+  const { clientes, obtenerClientesFn, clienteActualFn } = clientesContext;
+
+  // Obtener tareas cuando carga el componente
+  useEffect(() => {
+    obtenerClientesFn();
+
+    //eslint-disable-nextline
+  }, []);
+
+  if (clientes.length === 0)
+    return (
+      <>
+        <div className="p-4 flex justify-center w-full text-gray-900">
+          <h1 className="text-3xl">Aún no hay clientes!</h1>
+        </div>
+      </>
+    );
 
   const editarCliente = (id) => {
-    console.log("editar cliente: ", id);
-
-    // Agregar al state el id de cliente a editar
-
+    // Enviar id del cliente a editar
+    clienteActualFn(id);
     // Redirect a editar-cliente
     history.push({
       pathname: "/editar-cliente",
-      state: { id},
+      state: { id: "prueba" },
     });
   };
 
@@ -45,7 +51,7 @@ const ListadoClientes = () => {
             {clientes.map((datos) => {
               return (
                 <tr className="lg:hover:bg-gray-100" key={datos.id}>
-                  <td className="border px-4 py-2">{datos.nombreEmpresa}</td>
+                  <td className="border px-4 py-2">{datos.nombre}</td>
                   <td className="border px-4 py-2"> {datos.cuit} </td>
 
                   <td className="border px-4 py-2">
