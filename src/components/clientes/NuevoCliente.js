@@ -13,11 +13,11 @@ const NuevoCliente = () => {
   // State Inicial
   const [cliente, setCliente] = useState({
     nombre: "",
-    cuit: "",
+    username: "",
     password: "",
   });
 
-  const { nombre, cuit, password } = cliente;
+  const { nombre, username, password } = cliente;
 
   const onChange = (e) => {
     setCliente({
@@ -31,7 +31,7 @@ const NuevoCliente = () => {
     e.preventDefault();
 
     //Validar que no haya campos vacios
-    if (nombre.trim() === "" || cuit.trim() === "" || password.trim() === "") {
+    if (nombre.trim() === "" || username.trim() === "" || password.trim() === "") {
       Swal.fire({
         icon: "error",
         title: "Ups...",
@@ -41,7 +41,7 @@ const NuevoCliente = () => {
     }
 
     //Pasarlo al action
-    agregarClienteFn({ nombre, cuit });
+    agregarClienteFn({ nombre, username });
 
 
     // Alerta de que fue agregado con exito
@@ -88,18 +88,18 @@ const NuevoCliente = () => {
             <div className="mb-4">
               <label
                 className="block text-grey-darker text-md  mb-2"
-                htmlFor="cuit"
+                htmlFor="username"
               >
                 CUIT (Usuario)
               </label>
               <input
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker"
-                id="cuit"
+                id="username"
                 type="text"
-                name="cuit"
+                name="username"
                 placeholder="CUIT (Usuario)"
                 onChange={onChange}
-                value={cuit}
+                value={username}
               />
             </div>
             <div className="mb-6">

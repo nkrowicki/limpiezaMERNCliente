@@ -1,4 +1,6 @@
 import {
+  INICIAR_SESION,
+  CERRAR_SESION,
   OBTENER_CLIENTES,
   AGREGAR_CLIENTE,
   ELIMINAR_CLIENTE,
@@ -15,6 +17,21 @@ import {
 
 export default (state, action) => {
   switch (action.type) {
+    case INICIAR_SESION:
+      const user = action.payload;
+      user.rol = "admin";
+      user.nombre = "Administrador";
+      // Ver que no se guarde la pw en el state
+      return {
+        ...state,
+        usuario: user,
+      };
+
+    case CERRAR_SESION:
+      return {
+        state: action.payload,
+      };
+
     case OBTENER_CLIENTES:
       return {
         ...state,
@@ -24,7 +41,7 @@ export default (state, action) => {
         datosContacto: [],
       };
 
-      case ELIMINAR_CLIENTE:
+    case ELIMINAR_CLIENTE:
       return {
         ...state,
         clientes: state.clientes.filter(
@@ -91,7 +108,7 @@ export default (state, action) => {
         direcciones: direccionActualizada,
       };
 
-      case ELIMINAR_DIRECCION:
+    case ELIMINAR_DIRECCION:
       return {
         ...state,
         direcciones: state.direcciones.filter(

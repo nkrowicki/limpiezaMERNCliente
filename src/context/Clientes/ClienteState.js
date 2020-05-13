@@ -4,6 +4,8 @@ import { uuid } from "uuidv4";
 import clienteContext from "./clienteContext";
 import clienteReducer from "./clienteReducer";
 import {
+  INICIAR_SESION,
+  CERRAR_SESION,
   OBTENER_CLIENTES,
   AGREGAR_CLIENTE,
   ELIMINAR_CLIENTE,
@@ -15,10 +17,15 @@ import {
   ELIMINAR_DIRECCION,
   AGREGAR_CONTACTO,
   EDITAR_CONTACTO,
-  ELIMINAR_CONTACTO
+  ELIMINAR_CONTACTO,
 } from "../../types/";
 
 const ClienteState = (props) => {
+  const usuario = {
+    nombre: null,
+    rol: null,
+  };
+
   const clientes = [
     {
       id: 1,
@@ -124,6 +131,7 @@ const ClienteState = (props) => {
   ];
 
   const initialState = {
+    usuario: null,
     clientes: [],
     cliente: null,
     direcciones: [],
@@ -132,6 +140,14 @@ const ClienteState = (props) => {
 
   // Dispatch para ejecutar las acciones
   const [state, dispatch] = useReducer(clienteReducer, initialState);
+
+  const iniciarSesionFn = (usuario) => {
+    dispatch({ type: INICIAR_SESION, payload: usuario });
+  };
+
+  const cerrarSesionFn = () => {
+    dispatch({ type: CERRAR_SESION, payload: initialState});
+  };
 
   // Serie de confunciones para el CRUD
 
@@ -146,9 +162,9 @@ const ClienteState = (props) => {
   const eliminarClienteFn = (id) => {
     dispatch({
       type: ELIMINAR_CLIENTE,
-      payload: id
-    })
-  }
+      payload: id,
+    });
+  };
 
   const obtenerDireccionesFn = () => {
     dispatch({
@@ -236,10 +252,13 @@ const ClienteState = (props) => {
   return (
     <clienteContext.Provider
       value={{
+        usuario: state.usuario,
         clientes: state.clientes,
         cliente: state.cliente,
         direcciones: state.direcciones,
         datosContacto: state.datosContacto,
+        iniciarSesionFn,
+        cerrarSesionFn,
         obtenerClientesFn,
         agregarClienteFn,
         clienteActualFn,
@@ -249,7 +268,7 @@ const ClienteState = (props) => {
         agregarContactoFn,
         eliminarDatoContactoFn,
         eliminarDireccionFn,
-        eliminarClienteFn
+        eliminarClienteFn,
       }}
     >
       {props.children}

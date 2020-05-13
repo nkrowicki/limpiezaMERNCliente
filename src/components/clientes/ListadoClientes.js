@@ -3,13 +3,17 @@ import Swal from "sweetalert2";
 import { useHistory } from "react-router-dom";
 import clienteContext from "../../context/Clientes/clienteContext";
 
-
 const ListadoClientes = () => {
   const history = useHistory();
 
   const clientesContext = useContext(clienteContext);
 
-  const { clientes, obtenerClientesFn, clienteActualFn, eliminarClienteFn } = clientesContext;
+  const {
+    clientes,
+    obtenerClientesFn,
+    clienteActualFn,
+    eliminarClienteFn,
+  } = clientesContext;
 
   const [data, setData] = useState([]);
 
@@ -21,7 +25,7 @@ const ListadoClientes = () => {
     if (clientes !== null || clientes !== []) setData(clientes);
   }, [clientes]);
 
-  if (data.length === 0)
+  if (data === undefined || data.length === 0)
     return (
       <>
         <div className="p-4 flex justify-center w-full text-gray-900">
@@ -41,10 +45,10 @@ const ListadoClientes = () => {
   };
 
   const deleteCliente = (id) => {
-    
     Swal.fire({
       title: "¿Está seguro?",
-      text: "Esta acción no se puede deshacer. Si acepta eliminará todos los datos asociados a este cliente.",
+      text:
+        "Esta acción no se puede deshacer. Si acepta eliminará todos los datos asociados a este cliente.",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
@@ -52,15 +56,17 @@ const ListadoClientes = () => {
       confirmButtonText: "Si, eliminar!",
     }).then((result) => {
       if (result.value) {
-        
         // Eliminar de la bbdd pasando id
         eliminarClienteFn(id);
-      
+
         // Informar que se eliminó con éxito
-        Swal.fire("Eliminado!", "El cliente ha sido eliminado con éxito.", "success");
+        Swal.fire(
+          "Eliminado!",
+          "El cliente ha sido eliminado con éxito.",
+          "success"
+        );
       }
     });
-
   };
 
   return (
